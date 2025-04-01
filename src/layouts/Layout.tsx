@@ -1,23 +1,31 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ThemeProvider } from '@/hooks/useTheme';
+import { ThemeProvider, useTheme } from '@/hooks/useTheme';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
+const PageContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { theme } = useTheme();
+  
+  return (
+    <div className="min-h-screen flex flex-col transition-colors duration-300">
+      <Header />
+      <main className="flex-1">
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
-      </div>
+      <PageContent>{children}</PageContent>
     </ThemeProvider>
   );
 };
