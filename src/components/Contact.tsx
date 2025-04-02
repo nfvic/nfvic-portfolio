@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Mail, Phone, Github, Linkedin } from 'lucide-react';
 import { Input } from "@/components/ui/input";
@@ -8,7 +7,6 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-// Define form validation schema
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
@@ -22,7 +20,6 @@ const formSchema = z.object({
 });
 
 const Contact: React.FC = () => {
-  // Define form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,7 +29,6 @@ const Contact: React.FC = () => {
     },
   });
 
-  // Handle form submission
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log('Form submitted:', values);
     alert('Thank you for your message! I will get back to you soon.');
@@ -48,7 +44,6 @@ const Contact: React.FC = () => {
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
           <div>
             <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
             
@@ -103,7 +98,6 @@ const Contact: React.FC = () => {
             </div>
           </div>
           
-          {/* Contact Form */}
           <div className="bg-card p-8 rounded-xl shadow-sm">
             <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
             
@@ -116,7 +110,7 @@ const Contact: React.FC = () => {
                     <FormItem>
                       <FormLabel>Your Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="John Doe" {...field} />
+                        <Input placeholder="Victor Mumo" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
