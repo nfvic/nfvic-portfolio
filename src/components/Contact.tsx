@@ -1,42 +1,20 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Mail, Phone, Github, Linkedin } from 'lucide-react';
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-
-// Define form validation schema
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
-});
 
 const Contact: React.FC = () => {
-  // Define form
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
-
-  // Handle form submission
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const values = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      message: formData.get('message') as string,
+    };
+    
     console.log('Form submitted:', values);
     alert('Thank you for your message! I will get back to you soon.');
-    form.reset();
+    e.currentTarget.reset();
   };
 
   return (
@@ -103,67 +81,56 @@ const Contact: React.FC = () => {
             </div>
           </div>
           
-          {/* Contact Form */}
+          {/* Contact Form - Using plain HTML instead of React components */}
           <div className="bg-card p-8 rounded-xl shadow-sm">
             <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
             
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="John Doe" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="form-group">
+                <label htmlFor="name" className="block text-sm font-medium mb-1">Your Name</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  placeholder="Victor Mumo"
+                  required 
+                  minLength={2}
+                  className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
-                
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="email@example.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="email" className="block text-sm font-medium mb-1">Your Email</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  placeholder="email@example.com"
+                  required
+                  className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
-                
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your Message</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          placeholder="Type your message here..." 
-                          rows={5}
-                          className="resize-none"
-                          {...field} 
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <button
-                  type="submit"
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-medium transition-colors"
-                >
-                  Send Message
-                </button>
-              </form>
-            </Form>
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="message" className="block text-sm font-medium mb-1">Your Message</label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  placeholder="Type your message here..." 
+                  rows={5} 
+                  required
+                  minLength={10}
+                  className="w-full px-3 py-2 border border-input rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+                ></textarea>
+              </div>
+              
+              <button
+                type="submit"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-medium transition-colors"
+              >
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
       </div>
