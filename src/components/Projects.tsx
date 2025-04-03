@@ -29,8 +29,14 @@ const Projects: React.FC = () => {
     }
   };
 
+  // Debug output to see if projects are loaded
+  console.log('Projects data:', projects);
+  console.log('Filters:', filters);
+  console.log('Active filter:', activeFilter);
+  console.log('Visible projects:', visibleProjects);
+
   return (
-    <section id="projects" className="section-padding bg-secondary/50 dark:bg-secondary/20">
+    <section id="projects" className="section-padding bg-secondary/50 dark:bg-secondary/20 py-16">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">My Projects</h2>
         <p className="text-muted-foreground text-lg mb-10 text-center max-w-2xl mx-auto">
@@ -57,7 +63,7 @@ const Projects: React.FC = () => {
 
         {/* Projects grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {visibleProjects.length > 0 ? (
+          {visibleProjects && visibleProjects.length > 0 ? (
             visibleProjects.map((project) => (
               <div
                 key={project.id}
