@@ -26,7 +26,7 @@ const Projects: React.FC = () => {
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">My Projects</h2>
         <p className="text-muted-foreground text-lg mb-10 text-center max-w-2xl mx-auto">
-          Explore my recent work and personal projects that showcase my skills and passion for web development.
+          Discover my latest work and personal projects, where creativity meets code. Each project reflects my skills, passion, and dedication to crafting exceptional web experiences.
         </p>
 
         {/* Filter buttons */}
