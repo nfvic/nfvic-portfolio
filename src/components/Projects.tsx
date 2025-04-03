@@ -8,39 +8,25 @@ const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [visibleProjects, setVisibleProjects] = useState(projects);
   
-  // Extract all unique tags from projects and ensure exact case matching
-  const uniqueTags = Array.from(new Set(projects.flatMap(project => 
-    project.tags.map(tag => tag)
-  )));
-  
-  const filters = ['All', ...uniqueTags];
+  const allTags = [...new Set(projects.flatMap(project => project.tags))];
+  const filters = ['All', ...allTags];
   
   const handleFilterClick = (filter: string) => {
     setActiveFilter(filter);
-    
     if (filter === 'All') {
       setVisibleProjects(projects);
     } else {
-      // Use case-sensitive exact matching for tags
-      const filtered = projects.filter(project => 
-        project.tags.some(tag => tag === filter)
-      );
+      const filtered = projects.filter(project => project.tags.includes(filter));
       setVisibleProjects(filtered);
     }
   };
 
-  // Debug output to see if projects are loaded
-  console.log('Projects data:', projects);
-  console.log('Filters:', filters);
-  console.log('Active filter:', activeFilter);
-  console.log('Visible projects:', visibleProjects);
-
   return (
-    <section id="projects" className="section-padding bg-secondary/50 dark:bg-secondary/20 py-16">
+    <section id="projects" className="section-padding bg-secondary/50 dark:bg-secondary/20">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">My Projects</h2>
         <p className="text-muted-foreground text-lg mb-10 text-center max-w-2xl mx-auto">
-          Discover my latest work and personal projects, where creativity meets code. Each project reflects my skills, passion, and dedication to crafting exceptional web experiences.
+          Explore my recent work and personal projects that showcase my skills and passion for web development.
         </p>
 
         {/* Filter buttons */}
@@ -63,65 +49,59 @@ const Projects: React.FC = () => {
 
         {/* Projects grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {visibleProjects && visibleProjects.length > 0 ? (
-            visibleProjects.map((project) => (
-              <div
-                key={project.id}
-                className="bg-card rounded-xl overflow-hidden shadow-md card-hover"
-              >
-                <div className="h-60 overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
+          {visibleProjects.map((project) => (
+            <div
+              key={project.id}
+              className="bg-card rounded-xl overflow-hidden shadow-md card-hover"
+            >
+              <div className="h-60 overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                <p className="text-muted-foreground mb-4">{project.description}</p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map((tag) => (
+                    <span 
+                      key={tag} 
+                      className="bg-secondary px-3 py-1 text-xs rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
+                
+                <div className="flex gap-3">
+                  <a 
+                    href={project.link} 
+                    className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <Link className="h-4 w-4" />
+                    <span>Live Demo</span>
+                  </a>
                   
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span 
-                        key={tag} 
-                        className="bg-secondary px-3 py-1 text-xs rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex gap-3">
+                  {project.github && (
                     <a 
-                      href={project.link} 
+                      href={project.github} 
                       className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
-                      <Link className="h-4 w-4" />
-                      <span>Live Demo</span>
+                      <Github className="h-4 w-4" />
+                      <span>Source Code</span>
                     </a>
-                    
-                    {project.github && (
-                      <a 
-                        href={project.github} 
-                        className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="h-4 w-4" />
-                        <span>Source Code</span>
-                      </a>
-                    )}
-                  </div>
+                  )}
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="col-span-1 md:col-span-2 lg:col-span-2 text-center py-10">
-              <p className="text-muted-foreground">No projects found for this filter.</p>
             </div>
-          )}
+          ))}
         </div>
       </div>
     </section>
