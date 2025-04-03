@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -12,25 +11,24 @@ const Hero: React.FC = () => {
       <div className="container mx-auto relative z-10">
         <div className="max-w-3xl">
           <div className="animate-fade-in [animation-delay:200ms]">
-            <h2 className="text-primary font-medium text-xl mb-1">Hello, I'm</h2>
+            <h2 className="text-primary font-medium text-xl mb-1">Welcome to NFVIC Tech!</h2>
           </div>
           
           <div className="animate-fade-in [animation-delay:400ms]">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
-              <span className="text-gradient">John Doe</span>
+              <span className="text-gradient">Victor Daniel</span>
             </h1>
           </div>
           
           <div className="animate-fade-in [animation-delay:600ms]">
             <h2 className="text-2xl md:text-4xl font-semibold text-foreground/80 mb-6">
-              I create <span className="text-primary">beautiful</span> & <span className="text-primary">functional</span> web experiences
+              A <span className="text-primary">passionate web developer</span> dedicated to crafting <span className="text-primary">sleek, intuitive</span> web experiences
             </h2>
           </div>
           
           <div className="animate-fade-in [animation-delay:800ms]">
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl">
-              A passionate web developer with a keen eye for detail and a love for creating 
-              responsive, user-friendly websites that leave a lasting impression.
+              I blend creativity with functionality to build responsive, user-friendly websites that leave a lasting impact.
             </p>
           </div>
           
@@ -74,7 +72,6 @@ const Hero: React.FC = () => {
         </a>
       </div>
       
-      {/* Background gradient */}
       <div className="absolute top-0 -right-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 -left-40 w-96 h-96 bg-accent/20 rounded-full blur-3xl opacity-50" />
     </section>
