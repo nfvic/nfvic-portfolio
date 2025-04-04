@@ -10,8 +10,13 @@ const Hero: React.FC = () => {
     >
       <div className="container mx-auto relative z-10">
         <div className="max-w-3xl">
-          <div className="animate-fade-in [animation-delay:200ms]">
+          <div className="animate-fade-in [animation-delay:200ms] flex items-center gap-4">
             <h2 className="text-primary font-medium text-xl mb-1">Welcome to NFVIC Tech!</h2>
+            <img 
+              src="/lovable-uploads/3b6324da-940f-4a20-ae63-22c80e27b7b5.png" 
+              alt="NFVIC Tech Logo" 
+              className="w-16 h-16 object-contain rounded-lg"
+            />
           </div>
           
           <div className="animate-fade-in [animation-delay:400ms]">
