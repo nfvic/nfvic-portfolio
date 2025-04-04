@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
             <img 
               src="/lovable-uploads/3b6324da-940f-4a20-ae63-22c80e27b7b5.png" 
               alt="NFVIC Tech Logo" 
-              className="w-16 h-16 object-contain rounded-lg"
+              className="w-24 h-24 object-contain rounded-lg"
             />
           </div>
           
