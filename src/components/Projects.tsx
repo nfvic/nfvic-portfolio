@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { projects } from '@/data/projectData';
 import { Github, Link } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -7,6 +7,12 @@ import { cn } from '@/lib/utils';
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [visibleProjects, setVisibleProjects] = useState(projects);
+  
+  // Log projects data to help debug
+  useEffect(() => {
+    console.log('Projects data:', projects);
+    console.log('Visible projects:', visibleProjects);
+  }, [visibleProjects]);
   
   const allTags = [...new Set(projects.flatMap(project => project.tags))];
   const filters = ['All', ...allTags];
@@ -16,7 +22,9 @@ const Projects: React.FC = () => {
     if (filter === 'All') {
       setVisibleProjects(projects);
     } else {
-      const filtered = projects.filter(project => project.tags.includes(filter));
+      const filtered = projects.filter(project => 
+        project.tags.some(tag => tag === filter)
+      );
       setVisibleProjects(filtered);
     }
   };
@@ -48,61 +56,67 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {visibleProjects.map((project) => (
-            <div
-              key={project.id}
-              className="bg-card rounded-xl overflow-hidden shadow-md card-hover"
-            >
-              <div className="h-60 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span 
-                      key={tag} 
-                      className="bg-secondary px-3 py-1 text-xs rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+        {visibleProjects.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {visibleProjects.map((project) => (
+              <div
+                key={project.id}
+                className="bg-card rounded-xl overflow-hidden shadow-md card-hover"
+              >
+                <div className="h-60 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
                 </div>
-                
-                <div className="flex gap-3">
-                  <a 
-                    href={project.link} 
-                    className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    <Link className="h-4 w-4" />
-                    <span>Live Demo</span>
-                  </a>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-muted-foreground mb-4">{project.description}</p>
                   
-                  {project.github && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map((tag) => (
+                      <span 
+                        key={tag} 
+                        className="bg-secondary px-3 py-1 text-xs rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="flex gap-3">
                     <a 
-                      href={project.github} 
+                      href={project.link} 
                       className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
-                      <Github className="h-4 w-4" />
-                      <span>Source Code</span>
+                      <Link className="h-4 w-4" />
+                      <span>Live Demo</span>
                     </a>
-                  )}
+                    
+                    {project.github && (
+                      <a 
+                        href={project.github} 
+                        className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <Github className="h-4 w-4" />
+                        <span>Source Code</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-lg text-muted-foreground">No projects found for the selected filter.</p>
+          </div>
+        )}
       </div>
     </section>
   );
