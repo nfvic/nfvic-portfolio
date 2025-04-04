@@ -17,6 +17,8 @@ Contact section for easy reach-out
 
 HTML5 + CSS3 built from scratch (no frameworks)
 
+It has two themes -black blue and black red
+
 
 📸 Screenshots
 ![image](https://github.com/user-attachments/assets/48002422-2430-4504-bc9e-b726c1063974)
