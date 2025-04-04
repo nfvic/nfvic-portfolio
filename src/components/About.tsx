@@ -30,15 +30,15 @@ const About: React.FC = () => {
             <ul className="space-y-4 text-muted-foreground">
               <li className="flex flex-col">
                 <span className="font-medium text-foreground">BSc in Computer Science</span>
-                <span>University of Technology, 2018 - 2022</span>
+                <span>Muranga University of Technology, 2024 - 2028</span>
               </li>
               <li className="flex flex-col">
                 <span className="font-medium text-foreground">Full-Stack Web Development Certification</span>
-                <span>Tech Academy, 2022</span>
+                <span>PLP Academy, 2025</span>
               </li>
               <li className="flex flex-col">
                 <span className="font-medium text-foreground">Advanced JavaScript & React Specialization</span>
-                <span>Online Learning Platform, 2023</span>
+                <span>PLP Academy, 2025</span>
               </li>
             </ul>
             
@@ -57,7 +57,7 @@ const About: React.FC = () => {
             <h3 className="text-2xl font-bold mb-4">Professional Interests</h3>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                I'm particularly interested in frontend development with React, building intuitive user interfaces that solve complex problems with simple designs. My goal is to create web applications that are both functional and aesthetically pleasing.
+               I have a strong passion for frontend development, particularly with React, where I focus on building intuitive and user-friendly interfaces. My goal is to develop web applications that are both visually appealing and highly functional, ensuring a seamless user experience.
               </p>
               
               <div className="space-y-2">
