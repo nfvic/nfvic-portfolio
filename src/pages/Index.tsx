@@ -10,11 +10,13 @@ import Contact from '@/components/Contact';
 const Index = () => {
   return (
     <Layout>
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <Contact />
+      <div className="flex flex-col min-h-screen w-full">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </div>
     </Layout>
   );
 };

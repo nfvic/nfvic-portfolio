@@ -12,25 +12,29 @@ const Projects: React.FC = () => {
   useEffect(() => {
     console.log('Projects data:', projects);
     console.log('Visible projects:', visibleProjects);
-  }, [visibleProjects]);
+    console.log('Active filter:', activeFilter);
+  }, [visibleProjects, activeFilter]);
   
-  const allTags = [...new Set(projects.flatMap(project => project.tags))];
+  // Extract unique tags from projects for filter buttons
+  const allTags = ['Web', 'React', 'UI/UX', 'TypeScript', 'JavaScript', 'Node.js', 'MongoDB'];
   const filters = ['All', ...allTags];
   
   const handleFilterClick = (filter: string) => {
+    console.log('Filter clicked:', filter);
     setActiveFilter(filter);
     if (filter === 'All') {
       setVisibleProjects(projects);
     } else {
       const filtered = projects.filter(project => 
-        project.tags.some(tag => tag === filter)
+        project.tags.includes(filter)
       );
+      console.log('Filtered projects:', filtered);
       setVisibleProjects(filtered);
     }
   };
 
   return (
-    <section id="projects" className="section-padding bg-secondary/50 dark:bg-secondary/20">
+    <section id="projects" className="section-padding py-16 bg-secondary/50 dark:bg-secondary/20">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">My Projects</h2>
         <p className="text-muted-foreground text-lg mb-10 text-center max-w-2xl mx-auto">
