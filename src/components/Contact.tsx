@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Mail, Phone, Github, Linkedin } from 'lucide-react';
 
@@ -120,7 +119,7 @@ const Contact: React.FC = () => {
                   rows={5} 
                   required
                   minLength={10}
-                  className="w-full px-3 py-2 border border-input rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-3 py-2 border border-input rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary text-black dark:text-white bg-white dark:bg-background"
                 ></textarea>
               </div>
               
