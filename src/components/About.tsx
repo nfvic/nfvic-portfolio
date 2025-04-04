@@ -16,7 +16,7 @@ const About: React.FC = () => {
             <div className="space-y-4 text-muted-foreground">
               <p>
                 I'm a passionate web developer with expertise in building modern, responsive web applications. 
-                With a background in computer science, I've been coding for over 5 years and continue to expand my knowledge daily.
+                With a background in computer science, I've been coding for over 1 year and continue to expand my knowledge daily.
               </p>
               <p>
                 My journey began with simple HTML websites and has evolved to creating complex applications using the latest frameworks and technologies.
